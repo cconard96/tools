@@ -325,8 +325,8 @@ def _do_build(repo, ver):
                 if append:
                     paths.append(ls_file)
 
-        if verbose: print("Banned paths: "+join(banned, ", ")+"\n")
-        if verbose: print("Included paths: "+join(paths, ", ")+"\n")
+        if verbose: print("Banned paths: "+", ".join(banned)+"\n")
+        if verbose: print("Included paths: "+", ".join(paths)+"\n")
         archive_cmd_pattern = 'git archive --prefix=%s/ %s %s | bzip2 > %s'
         if commit and extra:
             print('Archiving GIT commit %s' % commit)
