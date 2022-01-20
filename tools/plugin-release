@@ -344,8 +344,13 @@ def _do_build(repo, ver):
                 ' '.join(paths),
                 archive
             )
+            if verbose: print("Archive command: "+archive_cmd)
 
-        res = subprocess.check_call(archive_cmd, shell=True)
+        try:
+             res = subprocess.check_call(archive_cmd, shell=True)
+        except CalledProcessError as error:
+            res = error.returncode
+            print(error.output)
         if res > 0:
             print_err('Archiving has failed!')
         else:
