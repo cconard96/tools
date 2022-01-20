@@ -325,6 +325,8 @@ def _do_build(repo, ver):
                 if append:
                     paths.append(ls_file)
 
+        if verbose: print("Banned paths: "+join(banned, ", ")+"\n")
+        if verbose: print("Included paths: "+join(paths, ", ")+"\n")
         archive_cmd_pattern = 'git archive --prefix=%s/ %s %s | bzip2 > %s'
         if commit and extra:
             print('Archiving GIT commit %s' % commit)
@@ -594,11 +596,13 @@ def guess_plugin_name():
             results = re.match(regexp, line)
             if results:
                 name = results.group(2)
+                if verbose: print("Found plugin name: "+name)
                 break
 
     if name is None:
         #No configured name found. Let's use current directory name
         name = os.path.split(plugin_dir)[-1]
+        if verbose: print("Using directory name: "+name+" for plugin name")
 
     return name.lower()
 
